@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="Valera DomCrawler Test Suite">
+            <directory>tests/Valera/Tests/Parser/DomCrawler</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
