@@ -48,7 +48,10 @@ class Adapter implements AdapterInterface
     {
         return function (Content $content, Result $result) use ($parser) {
             $this->crawler->clear();
-            $this->crawler->addContent((string) $content);
+            $this->crawler->addContent(
+                $content->getContent(),
+                $content->getMimeType()
+            );
             return $parser->parse($this->crawler, $result);
         };
     }

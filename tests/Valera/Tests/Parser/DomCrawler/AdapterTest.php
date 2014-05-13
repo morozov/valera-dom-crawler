@@ -43,13 +43,14 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         $wrapped = $this->adapter->wrap($parser);
         $content = new Content(
             'test-content',
+            'application/octet-stream',
             new Source('test-type', new Resource('http://example.com'))
         );
         $result = new Result();
         
         $this->crawler->expects($this->once())
             ->method('addContent')
-            ->with('test-content');
+            ->with('test-content', 'application/octet-stream');
 
         $parser->expects($this->once())
             ->method('parse')
