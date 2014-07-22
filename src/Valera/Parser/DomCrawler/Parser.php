@@ -4,6 +4,7 @@ namespace Valera\Parser\DomCrawler;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Valera\Parser\Result;
+use Valera\Resource;
 
 /**
  * Symfony DomCrawler based parser
@@ -17,6 +18,7 @@ interface Parser
      *
      * @param \Symfony\Component\DomCrawler\Crawler $crawler
      * @param \Valera\Parser\Result $result
+     * @param \Valera\Resource $resource
      */
-    public function parse(Crawler $crawler, Result $result);
+    public function parse(Crawler $crawler, Result $result, Resource $resource);
 }

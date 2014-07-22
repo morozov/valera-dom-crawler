@@ -6,6 +6,7 @@ use Symfony\Component\DomCrawler\Crawler;
 use Valera\Content;
 use Valera\Parser\AdapterInterface;
 use Valera\Parser\Result;
+use Valera\Resource;
 
 /**
  * Adapter of Symfony DomCrawler based parser
@@ -46,13 +47,13 @@ class Adapter implements AdapterInterface
      */
     public function wrap($parser)
     {
-        return function (Content $content, Result $result) use ($parser) {
+        return function (Content $content, Result $result, Resource $resource) use ($parser) {
             $this->crawler->clear();
             $this->crawler->addContent(
                 $content->getContent(),
                 $content->getMimeType()
             );
-            return $parser->parse($this->crawler, $result);
+            return $parser->parse($this->crawler, $result, $resource);
         };
     }
 }

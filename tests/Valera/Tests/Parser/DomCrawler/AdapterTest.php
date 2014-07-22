@@ -6,7 +6,7 @@ use Valera\Content;
 use Valera\Parser\DomCrawler\Adapter;
 use Valera\Parser\Result;
 use Valera\Resource;
-use Valera\Source;
+use Valera\Source\DocumentSource;
 
 class AdapterTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,10 +41,11 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     {
         $parser = $this->getParser();
         $wrapped = $this->adapter->wrap($parser);
+        $resource = new Resource('http://example.com');
         $content = new Content(
             'test-content',
             'application/octet-stream',
-            new Source('test-type', new Resource('http://example.com'))
+            new DocumentSource('test-type', $resource)
         );
         $result = new Result();
         
@@ -54,9 +55,9 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
 
         $parser->expects($this->once())
             ->method('parse')
-            ->with($this->crawler, $result);
+            ->with($this->crawler, $result, $resource);
 
-        $wrapped($content, $result);
+        $wrapped($content, $result, $resource);
     }
 
     private function getParser()
